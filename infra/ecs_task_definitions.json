@@ -1,0 +1,41 @@
+[
+    {
+      "name": "api",
+      "image": "my-api-image",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000
+        }
+      ]
+    },
+    {
+      "name": "banco",
+      "image": "postgres",
+      "essential": true,
+      "environment": [
+        {"name": "POSTGRES_USER", "value": "jogo"},
+        {"name": "POSTGRES_PASSWORD", "value": "jogo"},
+        {"name": "POSTGRES_DB", "value": "jogo"}
+      ],
+      "portMappings": [
+        {
+          "containerPort": 5432,
+          "hostPort": 5432
+        }
+      ]
+    },
+    {
+      "name": "front",
+      "image": "my-front-image",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        }
+      ]
+    }
+  ]
+  

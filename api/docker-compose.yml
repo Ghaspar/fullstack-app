@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: jogo-back-end
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - NODE_ENV=development
+    command: npm run start:dev
