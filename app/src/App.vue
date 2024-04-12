@@ -27,7 +27,7 @@
 <script>
 import CadastroJogo from './components/CadastroJogo.vue';
 import GridResultados from './components/GridResultados.vue';
-
+import { getJogos } from '@/services/apiService';
 export default {
   components: {
     CadastroJogo,
@@ -35,74 +35,22 @@ export default {
   },
   data() {
     return {
-      // Dados de exemplo para o componente GridResultados
-      jogos: [
-      {
-        "id": 3,
-        "nome_do_jogo": "Jogo de tênis",
-        "data": "2024-04-10T03:00:00.000Z",
-        "valor_por_rodada": "12.00",
-        "peso_do_valor": "0.7",
-        "pontos_da_rodada_jogada": 180,
-        "descricao": "Partida de tênis entre profissionais"
-    },
-    {
-        "id": 4,
-        "nome_do_jogo": "Jogo de quiz",
-        "data": "2024-04-11T03:00:00.000Z",
-        "valor_por_rodada": "5.00",
-        "peso_do_valor": "0.2",
-        "pontos_da_rodada_jogada": 40,
-        "descricao": "Concurso de conhecimentos gerais"
-    },
-    {
-        "id": 5,
-        "nome_do_jogo": "Jogo de futebol",
-        "data": "2024-04-05T03:00:00.000Z",
-        "valor_por_rodada": "10.00",
-        "peso_do_valor": "0.5",
-        "pontos_da_rodada_jogada": 100,
-        "descricao": "Partida de futebol amistosa"
-    },
-    {
-        "id": 6,
-        "nome_do_jogo": "Jogo de cartas",
-        "data": "2024-04-06T03:00:00.000Z",
-        "valor_por_rodada": "5.00",
-        "peso_do_valor": "0.3",
-        "pontos_da_rodada_jogada": 50,
-        "descricao": "Partida de cartas entre amigos"
-    },
-    {
-        "id": 7,
-        "nome_do_jogo": "Jogo de videogame",
-        "data": "2024-04-07T03:00:00.000Z",
-        "valor_por_rodada": "15.00",
-        "peso_do_valor": "0.8",
-        "pontos_da_rodada_jogada": 200,
-        "descricao": "Competição de videogame entre equipes"
-    },
-    {
-        "id": 1,
-        "nome_do_jogo": "Jogo de Counter Strike Zero",
-        "data": "2024-04-07T03:00:00.000Z",
-        "valor_por_rodada": "15.00",
-        "peso_do_valor": "0.8",
-        "pontos_da_rodada_jogada": 0,
-        "descricao": "Competição de Counter Strike Zero"
-    },
-    {
-        "id": 8,
-        "nome_do_jogo": "Jogo de Counter Strick",
-        "data": "2024-04-07T03:00:00.000Z",
-        "valor_por_rodada": "15.00",
-        "peso_do_valor": "0.8",
-        "pontos_da_rodada_jogada": 0,
-        "descricao": "Competição de videogame entre equipes"
-    }
-      ],
+      jogos: []
     };
   },
+  created() {
+    this.carregarJogos();
+  },
+  methods: {
+    async carregarJogos() {
+      try {
+        const response = await getJogos();
+        this.jogos = response;
+      } catch (error) {
+        console.error('Erro ao carregar jogos:', error);
+      }
+    }
+  }
 };
 </script>
 
