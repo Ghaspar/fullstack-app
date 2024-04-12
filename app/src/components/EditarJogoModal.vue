@@ -7,10 +7,10 @@
           <input id="nome" v-model="jogoEditando.nome_do_jogo" type="text">
   
           <label for="valor">Valor por Rodada:</label>
-          <input id="valor" v-model="jogoEditando.valor_por_rodada" type="number">
+          <input id="valor" v-model.number="jogoEditando.valor_por_rodada" type="text">
 
           <label for="valor">Peso do valor:</label>
-          <input id="valor" v-model="jogoEditando.peso_do_valor" type="number">
+          <input id="valor" v-model.number="jogoEditando.peso_do_valor" type="text">
   
           <label for="descricao">Descrição:</label>
           <textarea id="descricao" v-model="jogoEditando.descricao"></textarea>
