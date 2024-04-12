@@ -29,14 +29,29 @@
         </tr>
       </tbody>
     </table>
+    <EditarJogoModal
+      :jogo="jogoSelecionado"
+      :visible="isModalVisible"
+      @update:jogo="handleAtualizacaoJogo"
+      @close="isModalVisible = false"
+    />
   </div>
 </template>
 
 <script>
-import { getJogos, excluirJogo } from '@/services/apiService';
-
+import { getJogos, excluirJogo, editarJogo } from '@/services/apiService';
+import EditarJogoModal from './EditarJogoModal.vue';
 export default {
   props: ['jogos'],
+  data() {
+    return {
+      isModalVisible: false,
+      jogoSelecionado: null
+    };
+  },
+  components: {
+    EditarJogoModal
+  },
   methods: {
     async carregarJogos() {
       try {
@@ -47,8 +62,18 @@ export default {
       }
     },
     editarJogo(jogo) {
-      console.log('Editar jogo:', jogo);
-      // Lógica de edição (abrir modal, redirecionar para página de edição, etc.)
+      this.jogoSelecionado = jogo;
+      this.isModalVisible = true;
+    },
+    async handleAtualizacaoJogo(jogoAtualizado) {
+      console.log(jogoAtualizado.id, jogoAtualizado)
+      try {
+        console.log('Jogo atualizado:', jogoAtualizado);
+        await editarJogo(jogoAtualizado.id, jogoAtualizado);
+      } catch (error) {
+        console.error(error)
+      }
+     
     },
     async excluirJogo(id) {
       try {
