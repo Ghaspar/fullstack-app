@@ -37,9 +37,6 @@ import { getJogos, excluirJogo } from '@/services/apiService';
 
 export default {
   props: ['jogos'],
-  created() {
-    this.carregarJogos();
-  },
   methods: {
     async carregarJogos() {
       try {
