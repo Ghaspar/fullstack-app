@@ -14,8 +14,9 @@ export class JogoService {
   ) {}
 
   async findAll(): Promise<Jogo[]> {
-    console.log('Entrou no service FindAll \n', JSON.stringify(this.jogoRepository.find()));
-    return this.jogoRepository.find();
+    const jogo = await this.jogoRepository.find();
+    console.log('Entrou no service FindAll \n', jogo);
+    return jogo;
   }
  
  
