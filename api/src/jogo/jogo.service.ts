@@ -55,7 +55,20 @@ export class JogoService {
 
   private calcularPontosDaRodada(jogo: Jogo): number {
     // Implemente a lógica de cálculo dos pontos da rodada jogada aqui
-    // Utilize jogo.valor_por_rodada, jogo.peso_do_valor e a lógica de cálculo fornecida
-    return 0; // Altere para retornar o valor calculado
+
+    const valorPorRodada = Number(jogo.valor_por_rodada);
+    const pesoDoValor = Number(jogo.peso_do_valor);
+
+    if (isNaN(valorPorRodada) || isNaN(pesoDoValor)) {
+      console.error("Valores fornecidos são inválidos");
+      return 0; // Retorna 0 ou algum código de erro se os valores não são números
+    }
+
+    // Realiza o cálculo com ajuste para precisão de ponto flutuante
+    const fator = 10000;
+    const valueTotal = (valorPorRodada * fator) * (pesoDoValor * fator) / (fator * fator);
+
+    console.log(`Valor calculado: ${valueTotal}`);
+    return Math.floor(valueTotal);
   }
 }
