@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { getJogos } from '@/services/apiService';
+import { getJogos, excluirJogo } from '@/services/apiService';
 
 export default {
   props: ['jogos'],
@@ -59,9 +59,10 @@ export default {
         const confirmacao = confirm('Tem certeza que deseja excluir este jogo?');
         if (confirmacao) {
           // Chamar API para excluir jogo
+          const response = await excluirJogo(id);
           console.log('Excluir jogo de código:', id);
           // Atualizar lista de jogos após exclusão
-          // Exemplo: this.$emit('jogoExcluido', id);
+          this.$emit('jogoExcluido', response.data);
         }
       } catch (error) {
         console.error('Erro ao excluir jogo:', error);
